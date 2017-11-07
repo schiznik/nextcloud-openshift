@@ -3,6 +3,16 @@
 This repository contains an OpenShift 3 template to easily deploy Nextcloud on OpenShift.
 With this template it's possible to run your own Nextcloud instance f.e. on [APPUiO](https://appuio.ch/).
 
+## Pre-Install
+
+This uses  PersistentVolumeClaims, which if using with https://github.com/schiznik/openshift-centos-singlenode need to be created first.
+
+...
+echo "$PROJECT,nextcloud-data,1024" > oc-volume-list
+echo "$PROJECT,mariadb,1024" >> oc-volume-list
+sh createPV.sh
+...
+
 ## Installation
 
 ### 0 Create OpenShift project

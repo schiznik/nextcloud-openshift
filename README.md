@@ -7,11 +7,12 @@ With this template it's possible to run your own Nextcloud instance f.e. on [APP
 
 This uses  PersistentVolumeClaims, which if using with https://github.com/schiznik/openshift-centos-singlenode need to be created first.
 
-...
+```
 echo "$PROJECT,nextcloud-data,1024" > oc-volume-list
 echo "$PROJECT,mariadb,1024" >> oc-volume-list
 sh createPV.sh
-...
+```
+
 
 ## Installation
 

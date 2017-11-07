@@ -10,6 +10,7 @@ This uses PersistentVolumeClaims, which if using with my [Openshift on Centos](h
 ```
 echo "$PROJECT,nextcloud-data,1024" > oc-volume-list
 echo "$PROJECT,mariadb,1024" >> oc-volume-list
+zfs create exports/$PROJECT
 sh createPV.sh
 ```
 

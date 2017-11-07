@@ -5,7 +5,7 @@ With this template it's possible to run your own Nextcloud instance f.e. on [APP
 
 ## Pre-Install
 
-This uses  PersistentVolumeClaims, which if using with https://github.com/schiznik/openshift-centos-singlenode need to be created first.
+This uses PersistentVolumeClaims, which if using with my [Openshift on Centos](https://github.com/schiznik/openshift-centos-singlenode) scripts, need to be created first.
 
 ```
 echo "$PROJECT,nextcloud-data,1024" > oc-volume-list
@@ -18,7 +18,7 @@ sh createPV.sh
 
 ### 0 Create OpenShift project
 
-Create an OpenShift project if not already provided by the service
+Create an OpenShift project if not already provided by the service.
 
 ```
 PROJECT=nextcloud
@@ -54,7 +54,7 @@ oc process -f https://raw.githubusercontent.com/schiznik/openshift-nextcloud/mas
 
 **Hints**
 
-* You might want to enable TLS for your instance
+* You might want to enable TLS for your instance.
 
 ## Backup
 

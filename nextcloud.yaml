@@ -3,6 +3,7 @@ kind: Template
 metadata:
   name: nextcloud
   annotations:
+    kubernetes.io/tls-acme: "true"
     description: "Nextcloud - A safe home for all your data"
     tags: "fileshare,nextcloud"
     iconClass: fa-cloud-upload

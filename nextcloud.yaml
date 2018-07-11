@@ -3,10 +3,11 @@ kind: Template
 metadata:
   name: nextcloud
   annotations:
+    kubernetes.io/tls-acme: "true"
     description: "Nextcloud - A safe home for all your data"
     tags: "fileshare,nextcloud"
     iconClass: fa-cloud-upload
-    template.openshift.io/provider-display-name: "schiznik"
+    template.openshift.io/provider-display-name: "schizniknet"
     template.openshift.io/documentation-url: "https://github.com/schiznik/nextcloud-openshift/blob/master/README.md"
     template.openshift.io/support-url: "https://github.com/schiznik/nextcloud-openshift/issues"
 parameters:

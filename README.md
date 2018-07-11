@@ -3,11 +3,23 @@
 This repository contains an OpenShift 3 template to easily deploy Nextcloud on OpenShift.
 With this template it's possible to run your own Nextcloud instance f.e. on [APPUiO](https://appuio.ch/).
 
+## Pre-Install
+
+This uses PersistentVolumeClaims, which if using with my [Openshift on Centos](https://github.com/schiznik/openshift-centos-singlenode) scripts, need to be created first.
+
+```
+echo "$PROJECT,nextcloud-data,1024" > oc-volume-list
+echo "$PROJECT,mariadb,1024" >> oc-volume-list
+zfs create exports/$PROJECT
+sh createPV.sh
+```
+
+
 ## Installation
 
 ### 0 Create OpenShift project
 
-Create an OpenShift project if not already provided by the service
+Create an OpenShift project if not already provided by the service.
 
 ```
 PROJECT=nextcloud
@@ -23,7 +35,7 @@ oc -n openshift process mariadb-persistent -p MYSQL_DATABASE=nextcloud | oc -n $
 ### 2 Deploy Nextcloud
 
 ```
-oc process -f https://raw.githubusercontent.com/tobru/nextcloud-openshift/master/nextcloud.yaml -p NEXTCLOUD_HOST=nextcloud.example.com | oc -n $PROJECT create -f -
+oc process -f https://raw.githubusercontent.com/schiznik/openshift-nextcloud/master/nextcloud.yaml -p NEXTCLOUD_HOST=nextcloud.example.com | oc -n $PROJECT create -f -
 ```
 
 #### Template parameters
@@ -31,7 +43,7 @@ oc process -f https://raw.githubusercontent.com/tobru/nextcloud-openshift/master
 Execute the following command to get the available parameters:
 
 ```
-oc process -f https://raw.githubusercontent.com/tobru/nextcloud-openshift/master/nextcloud.yaml --parameters
+oc process -f https://raw.githubusercontent.com/schiznik/openshift-nextcloud/master/nextcloud.yaml --parameters
 ```
 
 ### 3 Configure Nextcloud
@@ -43,7 +55,7 @@ oc process -f https://raw.githubusercontent.com/tobru/nextcloud-openshift/master
 
 **Hints**
 
-* You might want to enable TLS for your instance
+* You might want to enable TLS for your instance.
 
 ## Backup
 
@@ -52,7 +64,7 @@ oc process -f https://raw.githubusercontent.com/tobru/nextcloud-openshift/master
 You can use the provided DB dump `CronJob` template:
 
 ```
-oc process -f https://raw.githubusercontent.com/tobru/nextcloud-openshift/master/mariadb-backup.yaml | oc -n MYNAMESPACE create -f -
+oc process -f https://raw.githubusercontent.com/schiznik/openshift-nextcloud/master/mariadb-backup.yaml | oc -n MYNAMESPACE create -f -
 ```
 
 This script dumps the DB to the same PV as the database stores it's data.
@@ -86,7 +98,7 @@ oc exec NEXTCLOUDPOD -c nextcloud -ti php occ
 
 Very welcome!
 
-1. Fork it (https://github.com/tobru/nextcloud-openshift/fork)
+1. Fork it (https://github.com/schiznik/openshift-nextcloud/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
